@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="pomelo-updater-progress-outer">
-                    <div class="pomelo-updater-progress-text">当前进度 <span>{{ current_progress.fname }}</span></div>
+                    <div class="pomelo-updater-progress-text">当前进度 <span>{{ current_progress.fname }} <span v-if="current_progress.max > 1">{{ size(current_progress.cur) }} / {{ size(current_progress.max) }}</span></span></div>
                     <div class="pomelo-updater-progress-bar">
                         <div class="pomelo-updater-progress-bar-fill" :style="{ width: (current_progress_rate * 100).toFixed(2) + '%' }"></div>
                     </div>

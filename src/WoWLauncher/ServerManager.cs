@@ -29,7 +29,7 @@ namespace WoWLauncher
 
         public static bool IsSpecifiedServer() => string.IsNullOrEmpty(ConfigManager.Config.server);
 
-        public static void HandleUpdate(Action<int, int> onTotalProgressChanged, Action<string, int, int> onCurrentProgressChanged)
+        public static void HandleUpdate(Action<long, long> onTotalProgressChanged, Action<string, long, long> onCurrentProgressChanged)
         {
             var remote = GetClientMetadata();
             var local = LoadLocalClientMetadata();
@@ -42,7 +42,6 @@ namespace WoWLauncher
                     {
                         onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), 0, 1);
                         var path = Path.Combine(ConfigManager.Config.game_path, x.filename);
-                        onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), 0, 1);
                         if (File.Exists(path))
                         {
                             var hash = sha256.ComputeHash(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read));
@@ -55,7 +54,7 @@ namespace WoWLauncher
                         }
                         DownloadFile(x.filename, (recv, total) =>
                         {
-                            onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), (int)recv, (int)total);
+                            onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), recv, total);
                         }, -1);
                     }
                 }
@@ -143,26 +142,34 @@ namespace WoWLauncher
         {
             try
             {
-                var req = HttpWebRequest.Create($"{ConfigManager.Config.server}/launcher/download?filename={Uri.EscapeDataString(filename)}");
-                req.Method = "GET";
-                var res = req.GetResponse();
-                var bytes = new byte[res.ContentLength];
-                using (var stream = res.GetResponseStream())
-                {
-                    var read = 0L;
-                    while (read < res.ContentLength)
-                    {
-                        read += stream.Read(bytes, (int)read, (int)res.ContentLength - (int)read);
-                        onBytesReceived?.Invoke(read, res.ContentLength);
-                    }
-                }
                 var folder = Path.GetDirectoryName(Path.Combine(ConfigManager.Config.game_path, filename));
                 if (!string.IsNullOrEmpty(folder) && !Directory.Exists(folder))
                 {
                     Directory.CreateDirectory(folder);
                 }
 
-                File.WriteAllBytes(Path.Combine(ConfigManager.Config.game_path, filename), bytes);
+                var req = HttpWebRequest.Create($"{ConfigManager.Config.server}/launcher/download?filename={Uri.EscapeDataString(filename)}");
+                req.Method = "GET";
+                var res = req.GetResponse();
+                var total = res.ContentLength;
+                onBytesReceived?.Invoke(0, res.ContentLength);
+                using (var stream = res.GetResponseStream())
+                using (var fs = new FileStream(Path.Combine(ConfigManager.Config.game_path, filename), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read))
+                {
+                    var read = 0L;
+                    while (read < res.ContentLength)
+                    {
+                        var buffer = new byte[4096];
+                        var count = 4096;
+                        if (res.ContentLength - read < 4096)
+                        {
+                            count = (int)(res.ContentLength - read);
+                        }
+                        read += stream.Read(buffer, 0, count);
+                        fs.Write(buffer, 0, count);
+                        onBytesReceived?.Invoke(read, res.ContentLength);
+                    }
+                }
             }
             catch
             {

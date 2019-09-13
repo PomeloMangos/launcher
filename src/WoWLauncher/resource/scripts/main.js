@@ -46,6 +46,18 @@
         launch: function () {
             if (this.view === 'update' || this.running) return;
             Launch(this.selected_realm);
+        },
+        size: function (bytes) {
+            if (bytes < 1024)
+                return bytes + ' B';
+            bytes /= 1024;
+            if (bytes < 1024)
+                return bytes.toFixed(1) + ' KB';
+            bytes /= 1024;
+            if (bytes < 1024)
+                return bytes.toFixed(1) + ' MB';
+            bytes /= 1024;
+            return bytes.toFixed(2) + ' GB';
         }
     }
 });
