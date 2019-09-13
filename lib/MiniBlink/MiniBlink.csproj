@@ -51,7 +51,7 @@
     <Compile Include="Core\BlinkDelegate.cs" />
     <Compile Include="Core\BlinkENUM.cs" />
     <Compile Include="Core\BlinkStruct.cs" />
-    <Compile Include="Core\JSFunctin.cs" />
+    <Compile Include="Core\JSFunction.cs" />
     <Compile Include="Core\JsValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

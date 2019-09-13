@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Linq;
 //using static MiniBlinkPinvoke.BlinkBrowserPInvoke;
 
 namespace MiniBlinkPinvoke
@@ -950,7 +951,7 @@ namespace MiniBlinkPinvoke
             var result = new ArrayList();
             foreach (var item in att)
             {
-                var xx = item.GetCustomAttributes(typeof(JSFunctin), true);
+                var xx = item.GetCustomAttributes(typeof(JSFunction), true);
                 if (xx != null && xx.Length != 0)
                 {
                     var jsnav = new wkeJsNativeFunction((es, _param) =>
@@ -1046,12 +1047,12 @@ namespace MiniBlinkPinvoke
         }
         //public string JsGetValue { get; set; }
 
-        [JSFunctin]
+        [JSFunction]
         public void Console_WriteLine(string msg)
         {
             MessageBox.Show("Console_WriteLine 方法被调用了：" + msg);
         }
-        [JSFunctin]
+        [JSFunction]
         public void Console_WriteLine2(int msg, string msg2)
         {
             MessageBox.Show("Console_WriteLine w 方法被调用了：" + msg2 + " " + msg);
@@ -1194,7 +1195,4 @@ namespace MiniBlinkPinvoke
             }
         }
     }
-
-
-
 }

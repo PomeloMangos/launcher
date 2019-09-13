@@ -16,32 +16,31 @@
                 <div class="pomelo-updater-progress-outer">
                     <div class="pomelo-updater-progress-text">总进度</div>
                     <div class="pomelo-updater-progress-bar">
-                        <div class="pomelo-updater-progress-bar-fill" style="width: 32%"></div>
+                        <div class="pomelo-updater-progress-bar-fill"  :style="{ width: (total_progress_rate * 100).toFixed(2) + '%' }"></div>
                     </div>
                 </div>
                 <div class="pomelo-updater-progress-outer">
-                    <div class="pomelo-updater-progress-text">当前进度</div>
+                    <div class="pomelo-updater-progress-text">当前进度 <span>{{ current_progress.fname }}</span></div>
                     <div class="pomelo-updater-progress-bar">
-                        <div class="pomelo-updater-progress-bar-fill" style="width: 72%"></div>
+                        <div class="pomelo-updater-progress-bar-fill" :style="{ width: (current_progress_rate * 100).toFixed(2) + '%' }"></div>
                     </div>
                 </div>
             </div>
             <div class="pomelo-announcement-outer" v-if="view === 'announce'">
                 <div class="pomelo-announcement-card">
                     <div class="pomelo-announcement-card-head"><i class="fa fa-warning"></i> 系统公告</div>
-                    <div class="pomelo-announcement-card-body">123123</div>
+                    <div class="pomelo-announcement-card-body" v-html="announce"></div>
                 </div>
             </div>
         </div>
         <div class="pomelo-footer">
-            <div class="pomelo-button">进入游戏</div>
+            <div class="pomelo-button" :class="{ 'disabled': view === 'update' }">{{ view === 'update' ? '更新中' : '进入游戏' }}</div>
             <div class="pomelo-realm-outer">
-                <select class="pomelo-realm">
-                    <option>一区（电信）</option>
-                    <option>二区（电信）</option>
+                <select class="pomelo-realm" v-model="selected_realm">
+                    <option v-for="x in realm">{{ x.name }}</option>
                 </select>
                 <i class="fa fa-caret-down pomelo-realm-icon"></i>
-                <div class="pomelo-realm-version">版本 2.4.3.8806 <a class="pomelo-register" href=";">注册账号</a></div>
+                <div class="pomelo-realm-version">版本 2.4.3.8806 <a v-if="register_address" onclick="RegisterAccount()" class="pomelo-register" href="javascript:;">注册账号</a></div>
             </div>
         </div>
     </div>

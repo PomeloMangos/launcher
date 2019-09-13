@@ -47,6 +47,7 @@
             this.blink.Text = " ";
             this.blink.Url = "";
             this.blink.ZoomFactor = 0F;
+            this.blink.DocumentReadyCallback += new MiniBlinkPinvoke.BlinkBrowser.DocumentReady(this.Blink_DocumentReadyCallback);
             // 
             // Main
             // 

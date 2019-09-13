@@ -1,5 +1,5 @@
 ﻿{
-  "server": "",
+  "server": "http://pomelo-wow.azurewebsites.net",
   "game_path": "",
   "realm_list": [
     {
