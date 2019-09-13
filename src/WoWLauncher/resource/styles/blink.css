@@ -1,0 +1,41 @@
+﻿body {
+    background-image: url(../images/bg.jpg);
+    background-size: 100%;
+}
+
+.pomelo-window-drag {
+    -webkit-app-region: drag;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100px;
+    z-index: 998;
+    text-align: left;
+}
+
+.pomelo-window-controls {
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    z-index: 999;
+    font-size: 16px;
+    text-align: right;
+}
+    .pomelo-window-controls a {
+        color: rgba(255,255,255,0.6);
+        transition: all 0.2s linear;
+        cursor: pointer;
+    }
+
+        .pomelo-window-controls a:hover {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .pomelo-window-controls a i {
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+            text-align: center;
+        }

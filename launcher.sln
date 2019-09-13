@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{53E3AA1E-50FF-48F1-8080-927F4B532710}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B3284044-818D-422E-B52D-2D8A4AB56F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlink", "lib\MiniBlink\MiniBlink.csproj", "{FF9F4C6E-B7BA-498A-9F3F-49F27CE9AF1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoWLauncher", "src\WoWLauncher\WoWLauncher.csproj", "{0EAAE309-A967-4C07-AB24-F276E9EF56EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF9F4C6E-B7BA-498A-9F3F-49F27CE9AF1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9F4C6E-B7BA-498A-9F3F-49F27CE9AF1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9F4C6E-B7BA-498A-9F3F-49F27CE9AF1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9F4C6E-B7BA-498A-9F3F-49F27CE9AF1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EAAE309-A967-4C07-AB24-F276E9EF56EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAAE309-A967-4C07-AB24-F276E9EF56EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAAE309-A967-4C07-AB24-F276E9EF56EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAAE309-A967-4C07-AB24-F276E9EF56EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FF9F4C6E-B7BA-498A-9F3F-49F27CE9AF1A} = {B3284044-818D-422E-B52D-2D8A4AB56F8E}
+		{0EAAE309-A967-4C07-AB24-F276E9EF56EB} = {53E3AA1E-50FF-48F1-8080-927F4B532710}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DD0DCB0-AD21-4D80-A9D6-D8F5C06B20F8}
+	EndGlobalSection
+EndGlobal
