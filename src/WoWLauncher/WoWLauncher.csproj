@@ -38,6 +38,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -46,13 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="Core\XLEngine.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="JsonUtil.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,9 +59,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="ServerManager.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +75,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="config.json" />
     <None Include="libs\XL\download\id.dat" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -105,11 +102,10 @@
     <EmbeddedResource Include="resource\index.html" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="resource\scripts\vue.min.js" />
     <EmbeddedResource Include="resource\fonts\fontawesome-webfont.svg" />
     <EmbeddedResource Include="resource\styles\font-awesome.min.css" />
     <EmbeddedResource Include="resource\scripts\main.js" />
-    <Content Include="resource\scripts\vue.js" />
-    <EmbeddedResource Include="index.html" />
     <Content Include="libs\XL\download\atl71.dll" />
     <Content Include="libs\XL\download\dl_peer_id.dll" />
     <Content Include="libs\XL\download\download_engine.dll" />

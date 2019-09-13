@@ -40,7 +40,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.blink.HTML = "";
             this.blink.Location = new System.Drawing.Point(0, 0);
-            this.blink.Margin = new System.Windows.Forms.Padding(6);
+            this.blink.Margin = new System.Windows.Forms.Padding(0);
             this.blink.Name = "blink";
             this.blink.Size = new System.Drawing.Size(580, 760);
             this.blink.TabIndex = 5;
@@ -50,17 +50,19 @@
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(580, 760);
             this.ControlBox = false;
             this.Controls.Add(this.blink);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(144, 72, 144, 72);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
-            this.Text = "魔兽世界：燃烧的远征";
+            this.Text = "魔兽世界启动器";
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Move += new System.EventHandler(this.Main_Move);
             this.ResumeLayout(false);
 
         }

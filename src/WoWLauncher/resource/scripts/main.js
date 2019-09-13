@@ -1,7 +1,7 @@
 ﻿window.app = new Vue({
     el: '#app',
     data: {
-        view: 'update'
+        view: 'announce'
     },
     watch: {
         deep: true

@@ -1,6 +1,20 @@
-﻿body {
+﻿::-webkit-scrollbar {
+    width: 10px;
+    height: 100%;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.4);
+    border-radius: 5px;
+}
+
+body {
     background-image: url(../images/bg.jpg);
     background-size: 100%;
+    font-family: 'Microsoft YaHei';
+    overflow: hidden;
 }
 
 .pomelo-window-drag {
@@ -18,9 +32,8 @@
     position: fixed;
     right: 0;
     top: 0;
-    padding: 10px;
+    padding: 20px;
     z-index: 999;
-    font-size: 16px;
     text-align: right;
 }
     .pomelo-window-controls a {
@@ -34,8 +47,158 @@
         }
 
         .pomelo-window-controls a i {
-            width: 20px;
-            height: 20px;
-            font-size: 20px;
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
             text-align: center;
         }
+
+.pomelo-main-body {
+    position: absolute;
+    top: 210px;
+    left: 0;
+    height: 400px;
+    width: 100%;
+}
+
+.pomelo-updater-outer {
+    padding: 40px 0 60px 0;
+    height: 300px;
+}
+
+.pomelo-updater-progress-outer {
+    height: 55px;
+    padding: 47.5px 52px;
+}
+
+.pomelo-updater-progress-bar {
+    height: 25px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.pomelo-updater-progress-bar-fill {
+    background-color: rgba(124, 200, 78, 0.95);
+    height: 25px;
+    width: 0%;
+    border-radius: 4px;
+}
+
+.pomelo-updater-progress-text {
+    font-size: 16px;
+    line-height: 23px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.pomelo-footer {
+    height: 90px;
+    padding: 0 50px;
+    position: absolute;
+    top: 610px;
+    left: 0;
+}
+
+.pomelo-button {
+    height: 90px;
+    font-size: 40px;
+    line-height: 90px;
+    width: 240px;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    background: linear-gradient(180deg, #7abb26, #34712b);
+    border-radius: 8px;
+    cursor: pointer;
+    float: left;
+    margin-right: 15px;
+}
+
+    .pomelo-button:hover {
+        background: linear-gradient(180deg, #9ac860, #4f7747);
+        color: rgba(255,255,255,0.85);
+    }
+
+    .pomelo-button.disabled {
+        background: #34712b;
+        opacity: 0.6;
+    }
+
+.pomelo-realm-outer {
+    padding: 5px;
+    float: left;
+    height: 80px;
+    margin-left: 15px;
+}
+
+.pomelo-realm {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.75);
+    border-radius: 0;
+    padding: 8px 12px;
+    margin-right: -10px;
+    width: 205px;
+    font-size: 18px;
+    -webkit-appearance: none;
+}
+
+    .pomelo-realm option {
+        border: 1px solid rgba(255,255,255,0.2);
+        background: #000;
+        color: rgba(255,255,255,0.75);
+    }
+
+.pomelo-realm-icon {
+    color: #97d34d;
+    font-size: 18px;
+    margin-left: -18px;
+    opacity: 0.8;
+}
+
+.pomelo-realm-version {
+    font-size: 16px;
+    line-height: 50px;
+    color: rgba(255,255,255,0.5);
+}
+
+.pomelo-register {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    margin-left: 19px;
+}
+
+    .pomelo-register:hover {
+        color: rgba(255,255,255,0.75);
+    }
+
+.pomelo-announcement-outer {
+    padding: 40px 50px 60px 50px;
+    height: 300px;
+}
+
+.pomelo-announcement-card {
+    border: 1px solid rgba(0,0,0,0.6);
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    height: 100%;
+}
+
+.pomelo-announcement-card-head {
+    padding: 18px 15px;
+    font-size: 22px;
+    line-height: 22px;
+    color: rgba(255,255,255,0.85);
+    background: rgba(89, 39, 30, 0.85);
+    border-bottom: 1px solid #a56e56;
+}
+
+.pomelo-announcement-card-body {
+    padding: 15px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    background: rgba(89, 39, 30, 0.55);
+    height: calc(100% - 91px);
+    overflow-y: auto;
+}

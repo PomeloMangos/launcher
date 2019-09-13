@@ -1,0 +1,16 @@
+﻿{
+  "server": "",
+  "game_path": "",
+  "realm_list": [
+    {
+      "name": "一区（电信）",
+      "address": "wow-realm.yuko.me:3724"
+    },
+    {
+      "name": "二区（电信）",
+      "address": "wow-realm.yuko.me:3724"
+    }
+  ],
+  "announce": "欢迎来到魔兽世界",
+  "register": ""
+}

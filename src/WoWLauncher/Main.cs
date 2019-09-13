@@ -33,7 +33,7 @@ namespace WoWLauncher
         private void Main_Load(object sender, EventArgs e)
         {
             blink.Url = "mb://resource/index.html";
-
+            blink.ZoomFactor = CurrentAutoScaleDimensions.Width / 144F;
         }
 
         [JSFunctin]
@@ -46,6 +46,11 @@ namespace WoWLauncher
         public void MainClose()
         {
             this.Close();
+        }
+
+        private void Main_Move(object sender, EventArgs e)
+        {
+            blink.ZoomFactor = CurrentAutoScaleDimensions.Width / 144F;
         }
     }
 }
