@@ -9,7 +9,10 @@ namespace WoWLauncher
 
         public static void SaveConfig()
         {
-            File.WriteAllText("config.json", JsonUtil.SerializeObject(Config));
+            lock(Config)
+            {
+                File.WriteAllText("config.json", JsonUtil.SerializeObject(Config));
+            }
         }
 
         static ConfigManager()

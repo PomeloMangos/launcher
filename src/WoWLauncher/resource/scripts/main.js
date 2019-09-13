@@ -3,6 +3,7 @@
     data: {
         register_address: null,
         view: 'announce',
+        running: false,
         total_progress: {
             max: 1,
             cur: 0
@@ -41,6 +42,10 @@
             if (!this.selected_realm && this.realm.length) {
                 this.selected_realm = this.realm[0].name;
             }
+        },
+        launch: function () {
+            if (this.view === 'update' || this.running) return;
+            Launch(this.selected_realm);
         }
     }
 });

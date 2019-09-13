@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Linq;
+using System.IO;
 using MiniBlinkPinvoke;
 
 namespace WoWLauncher
@@ -53,8 +55,40 @@ namespace WoWLauncher
         public void RegisterAccount()
         {
             var si = new ProcessStartInfo();
+            si.UseShellExecute = true;
             si.FileName = ConfigManager.Config.register;
             Process.Start(si);
+        }
+
+        [JSFunction]
+        public void Launch(string name)
+        {
+            var realm = ConfigManager.Config.realm_list.Single(x => x.name == name);
+            var content = $"SET realmlist \"{realm.address}\"";
+            File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf"), content);
+            File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhtw/realmlist.WTF"), content);
+            File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhcn/realmlist.WTF"), content);
+
+            blink.InvokeJSW($"window.app.running=true;");
+            BackgroundWorker bw_wow = new BackgroundWorker();
+            bw_wow.DoWork += Bw_wow_DoWork;
+            bw_wow.RunWorkerCompleted += Bw_wow_RunWorkerCompleted;
+            bw_wow.RunWorkerAsync();
+        }
+
+        private void Bw_wow_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            blink.InvokeJSW($"window.app.running=false;");
+        }
+
+        private void Bw_wow_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var si = new ProcessStartInfo();
+            si.FileName = "wow.exe";
+            si.WorkingDirectory = ConfigManager.Config.game_path;
+            var p = Process.Start(si);
+            p.WaitForExit();
+            p.Dispose();
         }
 
         private void Main_Move(object sender, EventArgs e)

@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="pomelo-footer">
-            <div class="pomelo-button" :class="{ 'disabled': view === 'update' }">{{ view === 'update' ? '更新中' : '进入游戏' }}</div>
+            <div class="pomelo-button" v-on:click="launch()" :class="{ 'disabled': view === 'update' || running }">{{ view === 'update' ? '更新中' : (running ? '运行中' : '进入游戏') }}</div>
             <div class="pomelo-realm-outer">
                 <select class="pomelo-realm" v-model="selected_realm">
                     <option v-for="x in realm">{{ x.name }}</option>
