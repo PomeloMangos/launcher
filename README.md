@@ -8,5 +8,9 @@ Supports full client, addons package downloading.
 
 ## Update client
 
+Download the updates from the blob server. 
+
+![image](https://user-images.githubusercontent.com/2216750/64909723-79a23e00-d742-11e9-9505-ae7e579fed22.png)
+
 ## Announcement page
 
