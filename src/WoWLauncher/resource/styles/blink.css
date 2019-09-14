@@ -17,6 +17,10 @@ body {
     overflow: hidden;
 }
 
+.clear {
+    clear: both;
+}
+
 .pomelo-window-drag {
     -webkit-app-region: drag;
     width: 100%;
@@ -124,6 +128,7 @@ body {
     .pomelo-button.disabled {
         background: #34712b;
         opacity: 0.6;
+        color: rgba(255,255,255,0.7);
     }
 
 .pomelo-realm-outer {
@@ -144,6 +149,10 @@ body {
     font-size: 18px;
     -webkit-appearance: none;
 }
+
+    .pomelo-realm:hover {
+        background: rgba(0,0,0,0.45);
+    }
 
     .pomelo-realm option {
         border: 1px solid rgba(255,255,255,0.2);
@@ -201,4 +210,83 @@ body {
     background: rgba(89, 39, 30, 0.55);
     height: calc(100% - 91px);
     overflow-y: auto;
+}
+
+.pomelo-textbox {
+    height: 40px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: rgba(255,255,255,0.75);
+    border-radius: 0;
+    padding: 8px 12px;
+    margin-right: -10px;
+    width: calc(100% - 64px);
+    font-size: 18px;
+    float: left;
+}
+
+.pomelo-browse {
+    float: left;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    margin-left: 30px;
+    line-height: 40px;
+}
+
+    .pomelo-browse:hover {
+        color: rgba(255,255,255,0.85);
+    }
+
+    .pomelo-textbox:hover {
+        background: rgba(0,0,0,0.45);
+    }
+
+    .pomelo-textbox:focus {
+        color: rgba(255,255,255,0.9);
+        border-color: rgba(255,255,255,0.6);
+        background: rgba(0,0,0,0.45);
+    }
+
+.pomelo-install-hint {
+    font-size: 16px;
+    line-height: 23px;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px rgba(0,0,0,0.3);
+    padding-top: 10px;
+}
+
+.pomelo-addons {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.75);
+    border-radius: 0;
+    padding: 8px 12px;
+    margin-right: -10px;
+    width: 100%;
+    font-size: 18px;
+    -webkit-appearance: none;
+}
+
+    .pomelo-addons option {
+        border: 1px solid rgba(255,255,255,0.2);
+        background: #000;
+        color: rgba(255,255,255,0.75);
+    }
+
+.pomelo-addons-icon {
+    color: #97d34d;
+    font-size: 18px;
+    margin-left: -18px;
+    opacity: 0.8;
+}
+
+.pomelo-addons-title {
+    margin-top: 25px;
+}
+
+.pomelo-addons:hover {
+    background: rgba(0,0,0,0.45);
 }

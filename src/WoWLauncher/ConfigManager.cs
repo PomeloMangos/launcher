@@ -33,6 +33,8 @@ namespace WoWLauncher
 
             public string game_path { get; set; }
 
+            public bool install_addons { get; set; }
+
             public string announce { get; set; }
 
             public string register { get; set; }

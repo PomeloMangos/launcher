@@ -76,6 +76,54 @@ namespace WoWLauncher
             bw_wow.RunWorkerAsync();
         }
 
+        [JSFunction]
+        public void Install(string path, bool addons)
+        {
+            ConfigManager.Config.game_path = path;
+            ConfigManager.Config.install_addons = addons;
+            ConfigManager.SaveConfig();
+            UpdateClient();
+        }
+
+        [JSFunction]
+        public void BrowseDirectory()
+        {
+            var dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择目录";
+            var result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (!string.IsNullOrEmpty(dialog.SelectedPath))
+                {
+                    blink.InvokeJSW($"window.app.game_path='{dialog.SelectedPath.Replace("\\", "\\\\")}';");
+                    FindWoWExe(dialog.SelectedPath);
+                }
+            }
+        }
+
+        [JSFunction]
+        public void FindWoWExe(string path)
+        {
+            if (File.Exists(Path.Combine(path, "wow.exe")))
+            {
+                blink.InvokeJSW($"window.app.game_exists=true;");
+            }
+            else
+            {
+                blink.InvokeJSW($"window.app.game_exists=false;");
+            }
+        }
+
+        public void UpdateClient()
+        {
+            blink.InvokeJSW($"window.app.view='update';");
+
+            BackgroundWorker bw_update = new BackgroundWorker();
+            bw_update.DoWork += Bw_update_DoWork;
+            bw_update.RunWorkerCompleted += Bw_update_RunWorkerCompleted;
+            bw_update.RunWorkerAsync();
+        }
+
         private void Bw_wow_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             blink.InvokeJSW($"window.app.running=false;");
@@ -113,12 +161,22 @@ namespace WoWLauncher
             bw_register.RunWorkerCompleted += Bw_register_RunWorkerCompleted;
             bw_register.RunWorkerAsync();
 
-            blink.InvokeJSW($"window.app.view='update';");
-
-            BackgroundWorker bw_update = new BackgroundWorker();
-            bw_update.DoWork += Bw_update_DoWork;
-            bw_update.RunWorkerCompleted += Bw_update_RunWorkerCompleted;
-            bw_update.RunWorkerAsync();
+            if (File.Exists(Path.Combine(ConfigManager.Config.game_path, "wow.exe")))
+            {
+                UpdateClient();
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(ConfigManager.Config.game_path))
+                {
+                    blink.InvokeJSW($"window.app.game_path='{Path.Combine(Environment.CurrentDirectory, "game").Replace("\\", "\\\\")}';");
+                }
+                else
+                {
+                    blink.InvokeJSW($"window.app.game_path='{ConfigManager.Config.game_path.Replace("\\", "\\\\")}';");
+                }
+                blink.InvokeJSW($"window.app.view='install';");
+            }
         }
 
         private void Bw_update_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

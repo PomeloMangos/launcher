@@ -15,10 +15,16 @@
         },
         announce: null,
         realm: [],
-        selected_realm: null
+        selected_realm: null,
+        addons_option: false,
+        game_path: null,
+        game_exists: false,
     },
     watch: {
-        deep: true
+        deep: true,
+        game_path: function (val) {
+            FindWoWExe(val);
+        }
     },
     computed: {
         total_progress_rate: function () {
@@ -29,6 +35,7 @@
         }
     },
     methods: {
+
         setTotalProgress: function (current, total) {
             this.total_progress.max = total;
             this.total_progress.cur = current;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.blink = new MiniBlinkPinvoke.BlinkBrowser();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.blink);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(144, 72, 144, 72);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

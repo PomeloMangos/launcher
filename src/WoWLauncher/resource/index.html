@@ -12,15 +12,35 @@
             <a @mousedown.stop onclick="MainClose()" title="关闭"><i class="fa fa-close"></i></a>
         </div>
         <div class="pomelo-main-body">
+            <div class="pomelo-updater-outer" v-if="view === 'install'">
+                <div class="pomelo-updater-progress-outer">
+                    <div class="pomelo-updater-progress-text">游戏目录</div>
+                    <div>
+                        <input type="text" class="pomelo-textbox" v-model="game_path" />
+                        <a class="pomelo-browse" href="javascript:;" v-on:click="BrowseDirectory()">浏览</a>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="pomelo-install-hint" v-if="!game_exists">将在此路径下安装《魔兽世界：燃烧的远征》</div>
+                    <div class="pomelo-install-hint" v-else>已找到《魔兽世界：燃烧的远征》，将进行必要的更新</div>
+                    <div class="pomelo-updater-progress-text pomelo-addons-title">插件选项</div>
+                    <div>
+                        <select class="pomelo-addons" v-model="addons_option">
+                            <option value="true">安装插件整合包</option>
+                            <option value="false">不安装插件整合包</option>
+                        </select>
+                        <i class="fa fa-caret-down pomelo-addons-icon"></i>
+                    </div>
+                </div>
+            </div>
             <div class="pomelo-updater-outer" v-if="view === 'update'">
                 <div class="pomelo-updater-progress-outer">
-                    <div class="pomelo-updater-progress-text">总进度</div>
+                    <div class="pomelo-updater-progress-text">总进度 <span v-if="total_progress.max > 1">{{ parseFloat(parseFloat(total_progress.cur) * 100.0 / parseFloat(total_progress.max)).toFixed(2) }}%</span></div>
                     <div class="pomelo-updater-progress-bar">
-                        <div class="pomelo-updater-progress-bar-fill"  :style="{ width: (total_progress_rate * 100).toFixed(2) + '%' }"></div>
+                        <div class="pomelo-updater-progress-bar-fill" :style="{ width: (total_progress_rate * 100).toFixed(2) + '%' }"></div>
                     </div>
                 </div>
                 <div class="pomelo-updater-progress-outer">
-                    <div class="pomelo-updater-progress-text">当前进度 <span>{{ current_progress.fname }} <span v-if="current_progress.max > 1">{{ size(current_progress.cur) }} / {{ size(current_progress.max) }}</span></span></div>
+                    <div class="pomelo-updater-progress-text">当前进度 <span>{{ current_progress.fname }}</span> <span v-if="current_progress.max > 1">{{ size(current_progress.cur) }} / {{ size(current_progress.max) }}</span></div>
                     <div class="pomelo-updater-progress-bar">
                         <div class="pomelo-updater-progress-bar-fill" :style="{ width: (current_progress_rate * 100).toFixed(2) + '%' }"></div>
                     </div>
@@ -34,7 +54,8 @@
             </div>
         </div>
         <div class="pomelo-footer">
-            <div class="pomelo-button" v-on:click="launch()" :class="{ 'disabled': view === 'update' || running }">{{ view === 'update' ? '更新中' : (running ? '运行中' : '进入游戏') }}</div>
+            <div class="pomelo-button" v-if="view === 'install'" v-on:click="Install(game_path, addons_option)">{{ game_exists ? '更新' : '安装' }}</div>
+            <div class="pomelo-button" v-else v-on:click="launch()" :class="{ 'disabled': view === 'update' || running }">{{ view === 'update' ? '更新中' : (running ? '运行中' : '进入游戏') }}</div>
             <div class="pomelo-realm-outer">
                 <select class="pomelo-realm" v-model="selected_realm">
                     <option v-for="x in realm">{{ x.name }}</option>
