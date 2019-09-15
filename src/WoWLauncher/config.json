@@ -1,7 +1,7 @@
 ﻿{
   "server": "http://pomelo-wow.azurewebsites.net",
   "game_path": "",
-  "install_addons": false,
+  "install_addons": true,
   "realm_list": [
     {
       "name": "一区（电信）",

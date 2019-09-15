@@ -65,6 +65,13 @@ namespace WoWLauncher
         {
             var realm = ConfigManager.Config.realm_list.Single(x => x.name == name);
             var content = $"SET realmlist \"{realm.address}\"";
+
+            // Remove read-only flag
+            if (File.GetAttributes(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf")).ToString().IndexOf("ReadOnly") != -1)
+            {
+                File.SetAttributes(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf"), FileAttributes.Normal);
+            }
+
             File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf"), content);
             File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhtw/realmlist.WTF"), content);
             File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhcn/realmlist.WTF"), content);
@@ -176,6 +183,7 @@ namespace WoWLauncher
                     blink.InvokeJSW($"window.app.game_path='{ConfigManager.Config.game_path.Replace("\\", "\\\\")}';");
                 }
                 blink.InvokeJSW($"window.app.view='install';");
+                blink.InvokeJSW($"window.app.addons_option={ConfigManager.Config.install_addons ? "true" : "false"};");
             }
         }
 

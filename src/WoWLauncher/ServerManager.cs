@@ -26,6 +26,8 @@ namespace WoWLauncher
             public string filename { get; set; }
 
             public string hash { get; set; }
+
+            public long size { get; set; }
         }
 
         private static MethodInfo methodAddWithoutValidate = typeof(WebHeaderCollection).GetMethod
@@ -46,7 +48,8 @@ namespace WoWLauncher
                     {
                         onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), 0, 1);
                         var path = Path.Combine(ConfigManager.Config.game_path, x.filename);
-                        if (File.Exists(path))
+                        var fi = new FileInfo(path);
+                        if (fi.Exists && fi.Length == x.size)
                         {
                             byte[] hash = null;
                             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -67,10 +70,25 @@ namespace WoWLauncher
                                 }
                             }
                         }
-                        DownloadFile(x.filename, (recv, total) =>
+
+                        // Create folder if non eixsts.
+                        var folder = Path.GetDirectoryName(Path.Combine(ConfigManager.Config.game_path, x.filename));
+                        if (!string.IsNullOrEmpty(folder) && !Directory.Exists(folder))
                         {
-                            onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), recv, total);
-                        }, 0, -1);
+                            Directory.CreateDirectory(folder);
+                        }
+
+                        if (x.size == 0)
+                        {
+                            File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, x.filename), string.Empty);
+                        }
+                        else
+                        {
+                            DownloadFile(x.filename, (recv, total) =>
+                            {
+                                onCurrentProgressChanged?.Invoke(Path.GetFileName(x.filename), recv, total);
+                            }, 0, -1);
+                        }
                     }
                 }
                 SaveClientMetadata(remote);
@@ -162,13 +180,6 @@ namespace WoWLauncher
         {
             try
             {
-                // Create folder if non eixsts.
-                var folder = Path.GetDirectoryName(Path.Combine(ConfigManager.Config.game_path, filename));
-                if (!string.IsNullOrEmpty(folder) && !Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-
                 // Start http request
                 var req = HttpWebRequest.Create($"{ConfigManager.Config.server}/launcher/download?filename={Uri.EscapeDataString(filename)}");
                 req.Method = "GET";

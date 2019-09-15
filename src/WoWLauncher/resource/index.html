@@ -56,13 +56,13 @@
         <div class="pomelo-footer">
             <div class="pomelo-button" v-if="view === 'install'" v-on:click="Install(game_path, addons_option)">{{ game_exists ? '更新' : '安装' }}</div>
             <div class="pomelo-button" v-else v-on:click="launch()" :class="{ 'disabled': view === 'update' || running }">{{ view === 'update' ? '更新中' : (running ? '运行中' : '进入游戏') }}</div>
-            <div class="pomelo-realm-outer">
-                <select class="pomelo-realm" v-model="selected_realm">
-                    <option v-for="x in realm">{{ x.name }}</option>
-                </select>
-                <i class="fa fa-caret-down pomelo-realm-icon"></i>
-                <div class="pomelo-realm-version">版本 2.4.3.8806 <a v-if="register_address" onclick="RegisterAccount()" class="pomelo-register" href="javascript:;">注册账号</a></div>
-            </div>
+        </div>
+        <div class="pomelo-realm-outer">
+            <select class="pomelo-realm" v-model="selected_realm">
+                <option v-for="x in realm">{{ x.name }}</option>
+            </select>
+            <i class="fa fa-caret-down pomelo-realm-icon"></i>
+            <div class="pomelo-realm-version">版本 2.4.3.8806 <a v-if="register_address" onclick="RegisterAccount()" class="pomelo-register" href="javascript:;">注册账号</a></div>
         </div>
     </div>
 
