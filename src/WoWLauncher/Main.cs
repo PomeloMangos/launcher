@@ -183,7 +183,7 @@ namespace WoWLauncher
                     blink.InvokeJSW($"window.app.game_path='{ConfigManager.Config.game_path.Replace("\\", "\\\\")}';");
                 }
                 blink.InvokeJSW($"window.app.view='install';");
-                blink.InvokeJSW($"window.app.addons_option={ConfigManager.Config.install_addons ? "true" : "false"};");
+                blink.InvokeJSW($"window.app.addons_option={(ConfigManager.Config.install_addons ? "true" : "false")};");
             }
         }
 
