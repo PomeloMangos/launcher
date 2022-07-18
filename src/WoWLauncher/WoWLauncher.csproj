@@ -24,7 +24,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -107,6 +107,9 @@
     <EmbeddedResource Include="resource\index.html" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="node.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="resource\scripts\vue.min.js" />
     <EmbeddedResource Include="resource\fonts\fontawesome-webfont.svg" />
     <EmbeddedResource Include="resource\styles\font-awesome.min.css" />
