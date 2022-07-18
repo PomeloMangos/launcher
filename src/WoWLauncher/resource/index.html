@@ -20,8 +20,8 @@
                         <a class="pomelo-browse" href="javascript:;" v-on:click="BrowseDirectory()">浏览</a>
                     </div>
                     <div class="clear"></div>
-                    <div class="pomelo-install-hint" v-if="!game_exists">将在此路径下安装《魔兽世界：燃烧的远征》</div>
-                    <div class="pomelo-install-hint" v-else>已找到《魔兽世界：燃烧的远征》，将进行必要的更新</div>
+                    <div class="pomelo-install-hint" v-if="!game_exists">将在此路径下安装《魔兽世界：巫妖王之怒》</div>
+                    <div class="pomelo-install-hint" v-else>已找到《魔兽世界：巫妖王之怒》，将进行必要的更新</div>
                     <div class="pomelo-updater-progress-text pomelo-addons-title">插件选项</div>
                     <div>
                         <select class="pomelo-addons" v-model="addons_option">
@@ -62,7 +62,7 @@
                 <option v-for="x in realm">{{ x.name }}</option>
             </select>
             <i class="fa fa-caret-down pomelo-realm-icon"></i>
-            <div class="pomelo-realm-version">版本 2.4.3.8806 <a v-if="register_address" onclick="RegisterAccount()" class="pomelo-register" href="javascript:;">注册账号</a></div>
+            <div class="pomelo-realm-version">版本 3.3.5.13507 <a v-if="register_address" onclick="RegisterAccount()" class="pomelo-register" href="javascript:;">注册账号</a></div>
         </div>
     </div>
 

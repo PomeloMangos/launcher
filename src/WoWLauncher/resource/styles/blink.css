@@ -113,7 +113,7 @@ body {
     width: 240px;
     color: rgba(255,255,255,0.7);
     text-align: center;
-    background: linear-gradient(180deg, #7abb26, #34712b);
+    background: linear-gradient(180deg, #4d9aef, #1655aa);
     border-radius: 8px;
     cursor: pointer;
     float: left;
@@ -121,12 +121,12 @@ body {
 }
 
     .pomelo-button:hover {
-        background: linear-gradient(180deg, #9ac860, #4f7747);
+        background: linear-gradient(180deg, #2a7ad3, #0d4187);
         color: rgba(255,255,255,0.85);
     }
 
     .pomelo-button.disabled {
-        background: #34712b;
+        background: #2b5471;
         opacity: 0.6;
         color: rgba(255,255,255,0.7);
     }
@@ -162,7 +162,7 @@ body {
     }
 
 .pomelo-realm-icon {
-    color: #97d34d;
+    color: #4d89d3;
     font-size: 18px;
     margin-left: -18px;
     opacity: 0.8;
@@ -200,15 +200,15 @@ body {
     font-size: 22px;
     line-height: 22px;
     color: rgba(255,255,255,0.85);
-    background: rgba(89, 39, 30, 0.85);
-    border-bottom: 1px solid #a56e56;
+    background: rgba(30, 50, 89, 0.85);
+    border-bottom: 1px solid #5680a5;
 }
 
 .pomelo-announcement-card-body {
     padding: 15px;
     font-size: 18px;
     color: rgba(255,255,255,0.75);
-    background: rgba(89, 39, 30, 0.55);
+    background: rgba(36, 79, 141, 0.55);
     height: calc(100% - 91px);
     overflow-y: auto;
 }
@@ -278,7 +278,7 @@ body {
     }
 
 .pomelo-addons-icon {
-    color: #97d34d;
+    color: #4d89d3;
     font-size: 18px;
     margin-left: -18px;
     opacity: 0.8;

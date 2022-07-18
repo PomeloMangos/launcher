@@ -4,10 +4,10 @@
   "install_addons": true,
   "realm_list": [
     {
-      "name": "Mirai",
-      "address": "p.mwow.org:3724"
+      "name": "柚子魔兽",
+      "address": "realm.mirai-wow.com:3724"
     }
   ],
-  "announce": "欢迎来到魔兽世界",
+  "announce": "欢迎来到柚子魔兽世界",
   "register": ""
 }

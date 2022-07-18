@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Linq;
 using System.IO;
+using System.Reflection;
 using MiniBlinkPinvoke;
 
 namespace WoWLauncher
@@ -67,14 +68,25 @@ namespace WoWLauncher
             var content = $"SET realmlist \"{realm.address}\"";
 
             // Remove read-only flag
-            if (File.GetAttributes(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf")).ToString().IndexOf("ReadOnly") != -1)
+            if (File.Exists(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf")))
             {
-                File.SetAttributes(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf"), FileAttributes.Normal);
+                if (File.GetAttributes(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf")).ToString().IndexOf("ReadOnly") != -1)
+                {
+                    File.SetAttributes(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf"), FileAttributes.Normal);
+                }
             }
 
             File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "realmlist.wtf"), content);
-            File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhtw/realmlist.WTF"), content);
-            File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhcn/realmlist.WTF"), content);
+            try
+            {
+                File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhtw/realmlist.WTF"), content);
+            }
+            catch { }
+            try
+            {
+                File.WriteAllText(Path.Combine(ConfigManager.Config.game_path, "data/zhcn/realmlist.WTF"), content);
+            }
+            catch { }
 
             blink.InvokeJSW($"window.app.running=true;");
             BackgroundWorker bw_wow = new BackgroundWorker();
@@ -140,7 +152,9 @@ namespace WoWLauncher
         {
             var si = new ProcessStartInfo();
             si.FileName = "wow.exe";
-            si.WorkingDirectory = ConfigManager.Config.game_path;
+            si.WorkingDirectory = String.IsNullOrEmpty(ConfigManager.Config.game_path) 
+                ? Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) 
+                : ConfigManager.Config.game_path;
             var p = Process.Start(si);
             p.WaitForExit();
             p.Dispose();
